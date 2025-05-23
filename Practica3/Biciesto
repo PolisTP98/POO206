@@ -1,15 +1,13 @@
-current_year = 2025
-
 while True:
     try:
-        year = int(input("\nIngresa un año y determinaré si es biciesto o no (Ingresa '0' para finalizar el programa)\n>>> "))
+        year = int(input("\n- Ingresa un año y determinaré si es biciesto o no (Ingresa '0' para finalizar el programa).\n>>> "))
         if year == 0:
             break
         elif year < 0:
-            raise ValueError("El año no puede ser menor que cero ni mayor al año actual.")
+            raise ValueError
     except ValueError as e:
-        print(f"\n- Error: {e}\nFavor de ingresar un año válido.")
+        print("- Error: Favor de ingresar un año válido.")
     else:
         result = (year % 4 == 0 and year % 100 != 0) or (year % 100 == 0 and year % 400 == 0)
-        print("\nEl año es biciesto.") if result else print("\nEl año no es biciesto.")
-print("\n¡Nos vemos pronto!")
+        print("- Es biciesto.") if result else print("- No es biciesto.")
+print("\n- ¡Nos vemos pronto!.")

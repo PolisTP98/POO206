@@ -8,4 +8,4 @@ try:
     media = calcular_media(v)
     print(f"\nLa media es {media:.2f}")
 except ValueError as e:
-    print(f"\nError de cálculo: {e}")
+    print(f"\nError de cálculo: {e}.")

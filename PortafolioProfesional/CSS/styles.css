@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding: 2rem;
+    background-color: rgb(0, 0, 100);
+}
+
+h1 {
+    margin: 0;
+}
+
+.Navigation_bar {
+    display: flex;
+    position: fixed;
+    width: 90%;
+    padding: 3rem 9rem;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.5rem);
+    border-radius: 5rem;
+}
+
+.Navigation_bar nav {
+    width: 100%;
+}
+
+.Navigation_bar nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.Navigation_bar a {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.Navigation_bar a::after {
+    content: '';
+    position: absolute;
+    background-color: rgb(150, 210, 250);
+    bottom: -0.2rem;
+    left: 0;
+    width: 0;
+    height: 0.2rem;
+    transition: width 0.3s ease;
+}
+
+.Navigation_bar a:hover {
+    color: rgb(150, 210, 250);
+    transform: scale(1.1);
+}
+
+.Navigation_bar a:hover::after {
+    width: 100%;
+}
+
+.Introduction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.Presentation {
+    font-size: 1.6rem;
+}
+
+.Name {
+    font-size: 6.4rem;
+    background: linear-gradient(to right, rgb(255, 65, 65), rgb(255, 65, 255), rgb(65, 200, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.About_Me {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Title {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.General_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6rem 2rem;
+}
+
+.Content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem 20%;
+    gap: 10rem;
+    margin-bottom: 10rem;
+}
+
+.Content2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 5rem;
+}
+
+.Sub_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 40rem;
+    padding: 2rem;
+}
+
+.Sub_content2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 2rem;
+}
+
+.Image {
+    width: 20rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.Image2 {
+    width: 12rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.Skill {
+    width: 4rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    gap: 10rem;
+}
+
+.Skill_set {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.Skill_set2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}

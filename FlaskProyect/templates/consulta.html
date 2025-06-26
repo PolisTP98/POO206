@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta</title>
+    <title>{{detalles[1]}} - {{detalles[2]}}</title>
 </head>
 <body>
-    <h2>Vista de la consulta</h2>
-    <a href = "/">Abrir la vista del formulario</a>
+    <h2>Detalle de álbum</h2>
+    <br>
+    <br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Álbum</td>
+                <td>Nombre de artista</td>
+                <td>Año de lanzamiento</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>{{detalles[0]}}</td>
+                <td>{{detalles[1]}}</td>
+                <td>{{detalles[2]}}</td>
+                <td>{{detalles[3]}}</td>
+                <td><a href="#">Actualizar</a></td>
+                <td><a href="#">Eliminar</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <a href = "/">Regresar al formulario</a>
 </body>
 </html>

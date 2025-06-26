@@ -26,7 +26,29 @@ def dbCheck():
 # Ruta simple
 @app.route("/")
 def home():
-    return render_template("formulario.html")
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM TBAlbum")
+        consultarTodo = cursor.fetchall()
+        return render_template("formulario.html", errores = {}, albums = consultarTodo)
+    except Exception as e:
+        print(f"Error al consultar todo: {e}")
+        return render_template("formulario.html", errores = {}, albums = [])
+    finally:
+        cursor.close()
+
+@app.route("/detalles/<int:id_album>")
+def detalles(id_album):
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM TBAlbum WHERE ID_registro = %s", (id_album,))
+        consultarDetalles = cursor.fetchone()
+        return render_template("consulta.html", errores = {}, detalles = consultarDetalles)
+    except Exception as e:
+        print(f"Error al consultar los detalles: {e}")
+        return redirect(url_for("home"))
+    finally:
+        cursor.close()
 
 @app.route("/consulta")
 def consulta():

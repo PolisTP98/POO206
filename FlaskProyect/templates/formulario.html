@@ -11,7 +11,7 @@
     <br>
     <br>
 
-        {% with mensajes= get_flashed_messages() %}
+        {% with mensajes = get_flashed_messages() %}
             {% if mensajes %}
                 {% for msj in mensajes %}
                     <h4 style="color: red">{{msj}}</h4>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar álbum</title>
+    <script>
+        function confirmarActualizacion(errores) {
+            let respuesta = confirm("¿Seguro que deseas actualizar la información del álbum?");
+            if(respuesta) {
+                document.getElementById("actualizarA").submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Actualizar álbum</h2>
+    <br>
+    <br>
+    <br>
+
+        {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+                {% for msj in mensajes %}
+                    <h4 style="color: red">{{msj}}</h4>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <form id="actualizarA" action="/actualizarAlbum/{{detalles[0]}}" method="POST">
+        <input type="text" name="txtTitulo" placeholder="Título" value="{{detalles[1]}}">
+        {% if err and err.txtTitulo %}
+            <p style="color: red">{{err.txtTitulo}}</p>
+        {% endif %}
+        <input type="text" name="txtArtista" placeholder="Artista" value="{{detalles[2]}}">
+        {% if err and err.txtArtista %}
+            <p style="color: red">{{err.txtArtista}}</p>
+        {% endif %}
+        <input type="number" name="txtYear" placeholder="Año de publicación" value="{{detalles[3]}}">
+        {% if err and err.txtYear %}
+            <p style="color: red">{{err.txtYear}}</p>
+        {% endif %}
+        <button type="button" onclick="confirmarActualizacion()">Actualizar álbum</button>
+    </form>
+</body>
+</html>

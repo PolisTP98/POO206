@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar álbum</title>
+</head>
+<body>
+    <h2>¿Deseas eliminar {{detalles[1]}}?</h2>
+    <br>
+    <br>
+    <br>
+
+        {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+                {% for msj in mensajes %}
+                    <h4 style="color: red">{{msj}}</h4>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <form action="/ConfirmarEliminarAlbum/{{detalles[0]}}", method="POST">
+        <input type="text" name="txtTitulo" placeholder="Título" value="{{detalles[1]}}" disabled>
+        <input type="text" name="txtArtista" placeholder="Artista" value="{{detalles[2]}}" disabled>
+        <input type="number" name="txtYear" placeholder="Año de publicación" value="{{detalles[3]}}" disabled>
+        <button type="submit">Eliminar</button>
+    </form>
+</body>
+</html>

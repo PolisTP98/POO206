@@ -28,7 +28,7 @@ def dbCheck():
 def home():
     try:
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM TBAlbum")
+        cursor.execute("SELECT * FROM TBAlbum WHERE Estado = 1")
         consultarTodo = cursor.fetchall()
         return render_template("formulario.html", errores = {}, albums = consultarTodo)
     except Exception as e:
@@ -63,6 +63,35 @@ def actualizar(id_album):
         return redirect(url_for("detalles", id_album = id_album))
     finally:
         cursor.close()
+
+@app.route("/EliminarAlbum/<int:id_album>")
+def eliminar(id_album):
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM TBAlbum WHERE ID_registro = %s", (id_album,))
+        consultarDetalles = cursor.fetchone()
+        return render_template("confirmDelete.html", detalles = consultarDetalles)
+    except Exception as e:
+        print(f"Error al consultar los detalles: {e}")
+        return redirect(url_for("detalles", id_album = id_album))
+    finally:
+        cursor.close()
+
+@app.route("/ConfirmarEliminarAlbum/<int:id_album>", methods = ["POST"])
+def confirmarEliminar(id_album):
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("UPDATE TBAlbum SET Estado = 0 WHERE ID_registro = %s;", (id_album,))
+        mysql.connection.commit()
+        flash("El album se eliminó de la base de datos")
+        return redirect(url_for("home"))
+    except Exception as e:
+        mysql.connection.rollback()
+        flash(f"Algo falló: {e}")
+        return redirect(url_for("home"))
+    finally:
+        cursor.close()
+
 
 @app.route("/consulta")
 def consulta():

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros</title>
+</head>
+<body>
+    <h2>Registros de restaurantes</h2>
+    <br>
+    <br>
+    <br>
+
+        {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+                {% for msj in mensajes %}
+                    <h4 style="color: red">{{msj}}</h4>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <form action="/agregar_restaurante" method="POST">
+        <input type="text" name="txtRestaurante" placeholder="Nombre del restaurante" value="{{request.form.txtRestaurante}}">
+        {% if errores and errores.txtRestaurante %}
+            <p style="color: red">{{errores.txtRestaurante}}</p>
+        {% endif %}
+        <br>
+        <input type="text" name="txtTipoDeComida" placeholder="Tipo de comida" value="{{request.form.txtTipoDeComida}}">
+        {% if errores and errores.txtTipoDeComida %}
+            <p style="color: red">{{errores.txtTipoDeComida}}</p>
+        {% endif %}
+        <br>
+        <textarea name="txtComentario" placeholder="Comentario (opcional)">{{request.form.txtComentario}}</textarea>
+        {% if errores and errores.txtComentario %}
+            <p style="color: red">{{errores.txtComentario}}</p>
+        {% endif %}
+        <br>
+        <input type="number" name="intCalificacion" placeholder="Calificación" value="{{request.form.intCalificacion}}">
+        {% if errores and errores.intCalificacion %}
+            <p style="color: red">{{errores.intCalificacion}}</p>
+        {% endif %}
+        <br>
+        <button type="submit">Guardar restaurante</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Restaurante</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for restaurante in restaurantes %}
+            <tr>
+                <td>{{restaurante.0}}</td>
+                <td><a href="/detalles_restaurante/{{restaurante.0}}">{{restaurante.1}}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar restaurante</title>
+    <script>
+        function confirmarActualizacion() {
+            let respuesta = confirm("¿Seguro que deseas actualizar la información del restaurante?");
+            if(respuesta) {
+                document.getElementById("actualizarR").submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Actualizar restaurante</h2>
+    <br>
+    <br>
+    <br>
+
+        {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+                {% for msj in mensajes %}
+                    <h4 style="color: red">{{msj}}</h4>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <form id="actualizarR" action="/editar_restaurante/{{detalles[0]}}" method="POST">
+        <input type="text" name="txtRestaurante" placeholder="Nombre del restaurante" value="{{detalles[1]}}">
+        {% if errores and errores.txtRestaurante %}
+            <p style="color: red">{{errores.txtRestaurante}}</p>
+        {% endif %}
+        <br>
+        <input type="text" name="txtTipoDeComida" placeholder="Tipo de comida" value="{{detalles[2]}}">
+        {% if errores and errores.txtTipoDeComida %}
+            <p style="color: red">{{errores.txtTipoDeComida}}</p>
+        {% endif %}
+        <br>
+        <textarea name="txtComentario" placeholder="Comentario (opcional)">{{detalles[3]}}</textarea>
+        {% if errores and errores.txtComentario %}
+            <p style="color: red">{{errores.txtComentario}}</p>
+        {% endif %}
+        <br>
+        <input type="number" name="intCalificacion" placeholder="Calificación" value="{{detalles[4]}}">
+        {% if errores and errores.intCalificacion %}
+            <p style="color: red">{{errores.intCalificacion}}</p>
+        {% endif %}
+        <br>
+        <button type="button" onclick="confirmarActualizacion()">Actualizar restaurante</button>
+    </form>
+</body>
+</html>

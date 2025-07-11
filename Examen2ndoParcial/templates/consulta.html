@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{detalles[1]}}</title>
+</head>
+<body>
+    <h2>Detalle de {{detalles[1]}}</h2>
+    <br>
+    <br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Restaurante</td>
+                <td>Tipo de comida</td>
+                <td>Comentario</td>
+                <td>Calificación</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>{{detalles[0]}}</td>
+                <td>{{detalles[1]}}</td>
+                <td>{{detalles[2]}}</td>
+                <td>{{detalles[3]}}</td>
+                <td>{{detalles[4]}}</td>
+                <td><a href="/actualizar_restaurante/{{detalles[0]}}">Actualizar</a></td>
+                <td><a href="/eliminar_restaurante/{{detalles[0]}}">Eliminar</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <a href = "/">Regresar</a>
+</body>
+</html>

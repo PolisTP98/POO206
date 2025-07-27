@@ -14,19 +14,19 @@
 
     <form id="actualizarA" action="/actualizarAlbum/{{ album[0] }}" method="POST">
         <div class="mb-3">
-            <input type="text" class="form-control" name="txtTitulo" placeholder="Título" value="{{ request.form.txtTitulo }}">
+            <input type="text" class="form-control" name="txtTitulo" placeholder="Título" value="{{ album[1] }}">
             {% if errores and errores.txtTitulo %}
                 <div class="error">{{ errores.txtTitulo }}</div>
             {% endif %}
         </div>
         <div class="mb-3">
-            <input type="text" class="form-control" name="txtArtista" placeholder="Artista" value="{{ request.form.txtArtista }}">
+            <input type="text" class="form-control" name="txtArtista" placeholder="Artista" value="{{ album[2] }}">
             {% if errores and errores.txtArtista %}
                 <div class="error">{{ errores.txtArtista }}</div>
             {% endif %}
         </div>
         <div class="mb-3">
-            <input type="number" class="form-control" name="txtYear" placeholder="Año de publicación" value="{{ request.form.txtYear }}">
+            <input type="number" class="form-control" name="txtYear" placeholder="Año de publicación" value="{{ album[3] }}">
             {% if errores and errores.txtYear %}
                 <div class="error">{{ errores.txtYear }}</div>
             {% endif %}

@@ -6,14 +6,6 @@
         <div class="col-md-5 mt-5">
             <h2 class="text-center display-5 text-primary mb-5">Agregar álbum</h2>
 
-            {% with mensajes= get_flashed_messages() %}
-                {% if mensajes %}
-                    {% for msj in mensajes %}
-                        <div class="flash">{{ msj }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-
             <form action="/guardarAlbum" method="POST">
                 <div class="mb-3">
                     <input type="text" class="form-control" name="txtTitulo" placeholder="Título" value="{{ request.form.txtTitulo }}">
@@ -34,9 +26,19 @@
                     {% endif %}
                 </div>
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-success">Guardar álbum</button>
+                    <button type="submit" class="btn btn-success mb-3">Guardar álbum</button>
+                    <a href="{{ url_for('albums.verAlbumesEliminados') }}" class="btn btn-success">Recuperar álbum</a>
                 </div>
             </form>
+
+            {% with mensajes= get_flashed_messages() %}
+                {% if mensajes %}
+                    {% for msj in mensajes %}
+                        <div class="flash mt-5">{{ msj }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
         </div>
 
         <div class="col-md-7 mt-5">

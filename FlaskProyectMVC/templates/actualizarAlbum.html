@@ -4,14 +4,6 @@
 
     <h2 class="text-center display-5 text-primary mt-5 mb-5">Actualizar álbum</h2>
 
-        {% with mensajes = get_flashed_messages() %}
-            {% if mensajes %}
-                {% for msj in mensajes %}
-                    <div class="flash">{{ msj }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
     <form id="actualizarA" action="/actualizarAlbum/{{ album[0] }}" method="POST">
         <div class="mb-3">
             <input type="text" class="form-control" name="txtTitulo" placeholder="Título" value="{{ album[1] }}">
@@ -35,6 +27,16 @@
             <button type="button" class="btn btn-success" onclick="confirmarActualizacion()">Actualizar álbum</button>
         </div>
     </form>
+
+    <a class="btn btn-success mt-5" href = "{{ url_for('albums.inicio') }}">Regresar</a>
+
+    {% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+            {% for msj in mensajes %}
+                <div class="flash mt-5">{{ msj }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
     <script>
         function confirmarActualizacion(errores) {

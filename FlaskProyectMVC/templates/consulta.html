@@ -3,7 +3,7 @@
 {% block body %}
 
     <h2 class="text-center display-5 text-primary mt-5 mb-5">Detalles de {{ album[1] }}</h2>
-    <table class="table table-striped table-hover mb-5">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <td>ID</td>
@@ -25,6 +25,6 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success" href = "{{ url_for('albums.inicio') }}">Regresar</a>
+    <a class="btn btn-success mt-5" href = "{{ url_for('albums.inicio') }}">Regresar</a>
 
 {% endblock %}

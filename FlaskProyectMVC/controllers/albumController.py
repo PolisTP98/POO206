@@ -71,7 +71,7 @@ def editarAlbum(id_album):
         return redirect(url_for("albums.inicio"))
     
 # Ruta para actualizar un álbum
-@albumsBP.route("/actualizarAlbum/<int:id_album>")
+@albumsBP.route("/actualizarAlbum/<int:id_album>", methods = ["POST"])
 def actualizarAlbum(id_album):
     errores = {}
 
@@ -86,11 +86,11 @@ def actualizarAlbum(id_album):
     if not lanzamiento_album:
         errores["txtYear"] = "Año de lanzamiento obligatorio"
     elif not lanzamiento_album.isdigit() or int(lanzamiento_album) not in range(minimum_year, maximum_year + 1):
-        errores["txtYear"] = "Año de lanzamiento inválido"
+        errores["txtYear"] = f"Año de lanzamiento inválido ({minimum_year} - {maximum_year})"
     
     if errores:
         session["errores"] = errores
-        return redirect(url_for("editarAlbum", id_album = id_album))
+        return redirect(url_for("albums.editarAlbum", id_album = id_album))
     
     try:
         updateAlbum(id_album, titulo_album, artista_album, lanzamiento_album)
@@ -114,7 +114,7 @@ def confirmarEliminarAlbum(id_album):
         return redirect(url_for("albums.inicio"))
     
 # Ruta para eliminar un álbum (soft delete)
-@albumsBP.route("/eliminarAlbum/<int:id_album>")
+@albumsBP.route("/eliminarAlbum/<int:id_album>", methods = ["POST"])
 def eliminarAlbum(id_album):
     try:
         softDeleteAlbum(id_album)
@@ -122,5 +122,38 @@ def eliminarAlbum(id_album):
     except Exception as e:
         print(f"¡Error!, {e}")
         flash("Error al eliminar el álbum")
+    finally:
+        return redirect(url_for("albums.inicio"))
+    
+@albumsBP.route("/verAlbumesEliminados")
+def verAlbumesEliminados():
+    try:
+        albums = getEliminated()
+        session["html_title"] = "Álbumes eliminados"
+        return render_template("albumesEliminados.html", albums = albums)
+    except Exception as e:
+        print(f"¡Error!, {e}")
+        flash("Error al consultar los álbumes eliminados")
+        return redirect(url_for("albums.inicio"))
+    
+@albumsBP.route("/confirmarRecuperarAlbum/<int:id_album>")
+def confirmarRecuperarAlbum(id_album):
+    try:
+        album = getByID(id_album)
+        session["html_title"] = f"Recuperar {album[1]}"
+        return render_template("confirmRecover.html", album = album)
+    except Exception as e:
+        print(f"¡Error!, {e}")
+        flash("Error al consultar el álbum a recuperar")
+        return redirect(url_for("albums.inicio"))
+    
+@albumsBP.route("/recuperarAlbum/<int:id_album>", methods = ["POST"])
+def recuperarAlbum(id_album):
+    try:
+        recoverAlbum(id_album)
+        flash("¡Álbum recuperado exitosamente!")
+    except Exception as e:
+        print(f"¡Error!, {e}")
+        flash("Error al recuperar el álbum")
     finally:
         return redirect(url_for("albums.inicio"))

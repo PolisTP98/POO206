@@ -2,9 +2,9 @@
 
 {% block body %}
 
-    <h2 class="text-center display-5 text-primary mt-5 mb-5">¿Deseas eliminar {{ album[1] }}?</h2>
+    <h2 class="text-center display-5 text-primary mt-5 mb-5">¿Deseas recuperar {{ album[1] }}?</h2>
 
-    <form action="/eliminarAlbum/{{ album[0] }}" method="POST">
+    <form action="/recuperarAlbum/{{ album[0] }}" method="POST">
         <div class="mb-3">
             <input type="text" class="form-control" name="txtTitulo" placeholder="Título" value="{{ album[1] }}" disabled>
         </div>
@@ -15,7 +15,7 @@
             <input type="number" class="form-control" name="txtYear" placeholder="Año de publicación" value="{{ album[3] }}" disabled>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-success">Eliminar álbum</button>
+            <button type="submit" class="btn btn-success">Recuperar álbum</button>
         </div>
     </form>
 

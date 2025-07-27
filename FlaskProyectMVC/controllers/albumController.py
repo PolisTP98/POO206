@@ -61,7 +61,7 @@ def detalleAlbum(id_album):
 @albumsBP.route("/editarAlbum/<int:id_album>")
 def editarAlbum(id_album):
     try:
-        errores = session.get("errores", "")
+        errores = session.get("errores", {})
         album = getByID(id_album)
         session["html_title"] = f"Actualizar {album[1]}"
         return render_template("actualizarAlbum.html", errores = errores, album = album)

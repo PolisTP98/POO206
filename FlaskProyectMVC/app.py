@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask_mysqldb import MySQL
 from config import Config
 
@@ -7,6 +7,11 @@ mysql = MySQL()
 def createApp():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    @app.before_request
+    def make_session_non_permanent():
+        session.permanent = False
+
     mysql.init_app(app)
     from controllers.albumController import albumsBP
     from controllers.databaseController import databaseBP

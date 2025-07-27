@@ -50,20 +50,6 @@ def detalles(id_album):
     finally:
         cursor.close()
 
-@app.route("/actualizar/<int:id_album>")
-def actualizar(id_album):
-    try:
-        errores = session.get("errores", "")
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM TBAlbum WHERE ID_registro = %s", (id_album,))
-        consultarDetalles = cursor.fetchone()
-        return render_template("actualizarAlbum.html", err = errores, detalles = consultarDetalles)
-    except Exception as e:
-        print(f"Error al consultar los detalles: {e}")
-        return redirect(url_for("detalles", id_album = id_album))
-    finally:
-        cursor.close()
-
 @app.route("/EliminarAlbum/<int:id_album>")
 def eliminar(id_album):
     try:
@@ -158,6 +144,21 @@ def guardar():
             cursor.close()
 
     return render_template("formulario.html", err = errores)
+
+@app.route("/actualizar/<int:id_album>")
+def actualizar(id_album):
+    try:
+        errores = session.get("errores", "")
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM TBAlbum WHERE ID_registro = %s", (id_album,))
+        consultarDetalles = cursor.fetchone()
+        return render_template("actualizarAlbum.html", err = errores, detalles = consultarDetalles)
+    except Exception as e:
+        print(f"Error al consultar los detalles: {e}")
+        return redirect(url_for("detalles", id_album = id_album))
+    finally:
+        cursor.close()
+
 
 @app.route("/actualizarAlbum/<int:id_album>", methods = ["POST"])
 def guardarCambios(id_album):

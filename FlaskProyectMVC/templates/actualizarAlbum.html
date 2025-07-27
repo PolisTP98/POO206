@@ -1,0 +1,48 @@
+{% extends "plantilla.html" %}
+
+{% block body %}
+
+    <h2 class="text-center display-5 text-primary mt-5 mb-5">Actualizar álbum</h2>
+
+        {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+                {% for msj in mensajes %}
+                    <div class="flash">{{ msj }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <form id="actualizarA" action="/actualizarAlbum/{{ album[0] }}" method="POST">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="txtTitulo" placeholder="Título" value="{{ request.form.txtTitulo }}">
+            {% if errores and errores.txtTitulo %}
+                <div class="error">{{ errores.txtTitulo }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="txtArtista" placeholder="Artista" value="{{ request.form.txtArtista }}">
+            {% if errores and errores.txtArtista %}
+                <div class="error">{{ errores.txtArtista }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <input type="number" class="form-control" name="txtYear" placeholder="Año de publicación" value="{{ request.form.txtYear }}">
+            {% if errores and errores.txtYear %}
+                <div class="error">{{ errores.txtYear }}</div>
+            {% endif %}
+        </div>
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-success" onclick="confirmarActualizacion()">Actualizar álbum</button>
+        </div>
+    </form>
+
+    <script>
+        function confirmarActualizacion(errores) {
+            let respuesta = confirm("¿Seguro que deseas actualizar la información del álbum?");
+            if(respuesta) {
+                document.getElementById("actualizarA").submit();
+            }
+        }
+    </script>
+
+{% endblock %}

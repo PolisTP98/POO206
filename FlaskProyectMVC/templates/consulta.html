@@ -1,0 +1,30 @@
+{% extends "plantilla.html" %}
+
+{% block body %}
+
+    <h2 class="text-center display-5 text-primary mt-5 mb-5">Detalles de {{ album[1] }}</h2>
+    <table class="table table-striped table-hover mb-5">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Álbum</td>
+                <td>Nombre de artista</td>
+                <td>Año de lanzamiento</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>{{ album[0] }}</td>
+                <td>{{ album[1] }}</td>
+                <td>{{ album[2] }}</td>
+                <td>{{ album[3] }}</td>
+                <td><a href="{{ url_for('albums.editarAlbum', id_album = album[0]) }}">Actualizar</a></td>
+                <td><a href="{{ url_for('albums.confirmarEliminarAlbum', id_album = album[0]) }}">Eliminar</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href = "{{ url_for('albums.inicio') }}">Regresar</a>
+
+{% endblock %}
